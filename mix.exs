@@ -4,7 +4,7 @@ defmodule Mailer.Mixfile do
   def project do
     [
       app: :mailer,
-      version: "0.0.1",
+      version: version,
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
       elixir: "~> 1.0.0",
