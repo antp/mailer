@@ -1,6 +1,4 @@
 defmodule Mailer do
-  use Application
-
   alias Mailer.Email.Plain
   alias Mailer.Email.Multipart
 
@@ -110,7 +108,7 @@ defmodule Mailer do
     email = Plain.add_from(email, from)
     email = Plain.add_to(email, to)
     email = Plain.add_subject(email, subject)
-    email = Plain.add_message_id(email, Mail.Messaage.Id.create(from))
+    email = Plain.add_message_id(email, Mailer.Message.Id.create(from))
     email = Plain.add_date(email, date)
     Plain.add_body(email, body)
 
@@ -128,7 +126,7 @@ defmodule Mailer do
     email = Multipart.add_from(email, from)
     email = Multipart.add_to(email, to)
     email = Multipart.add_subject(email, subject)
-    email = Multipart.add_message_id(email, Mail.Messaage.Id.create(from))
+    email = Multipart.add_message_id(email, Mailer.Message.Id.create(from))
     email = Multipart.add_date(email, date)
     email = Multipart.add_text_body(email, plain_text)
     Multipart.add_html_body(email, html_text)
