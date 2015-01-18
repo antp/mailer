@@ -28,7 +28,7 @@ Mailer uses ```gen_smtp``` to provide the mailing infrastructure.
 First compose an email with:
 
 ```elixir
-  email = Mailer.compose("from@example.com", tp@example.com, "Subject", "welcome_template", template_data)
+  email = Mailer.compose("from@example.com", "to@example.com", "Subject", "welcome_template", template_data)
 ```
 
 Then send the email with:
@@ -122,7 +122,7 @@ priv/templates/welcome/fr/welcome.html
 By including the country code in the compose call, Mailer will render the correct localised template.
 
 ```elixir
-Mailer.compose("from@example.com", tp@example.com, "Subject", "welcome", data, "en")
+Mailer.compose("from@example.com", "to@example.com", "Subject", "welcome", data, "en")
 ```
 
 # Author
