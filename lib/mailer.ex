@@ -16,7 +16,7 @@ defmodule Mailer do
 
   First compose an email with
 
-      email = Mailer.compose("from@example.com", tp@example.com, "Subject", "welcome_template", template_data)
+      email = Mailer.compose_email("from@example.com", "to@example.com", "Subject", "welcome_template", template_data)
 
   Then send the email with
 
