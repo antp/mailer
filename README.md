@@ -85,9 +85,9 @@ hostname      | Hostname of your mail client
 transport     | :smtp -> deliver mail using smtp (default)<br /> :test -> deliver mail to a test server
 username      | username to use in authentication
 password      | password for the username
-tls           | :always -> always use TLS<br />:never -> never use TLS<br />:if_availible -> use TLS if available (default)
+tls           | :always -> always use TLS<br />:never -> never use TLS<br />:if_available -> use TLS if available (default)
 ssl           | :true -> use SSL<br />:false -> do not use SSL (default)
-auth          | :if_avialible -> use authentication if availible (default)
+auth          | :if_available -> use authentication if available (default)
 retries       | Number of retries before a send failure is reported<br /> defaults to 1
 
 
