@@ -124,6 +124,14 @@ By including the country code in the compose call, Mailer will render the correc
 ```elixir
 Mailer.compose_email("from@example.com", "to@example.com", "Subject", "welcome", data, "en")
 ```
+if the template files are not found in the language directory Mailer will look for a default template to send in the parent directory.
+
+```elixir
+priv/templates/welcome <- default location of templates
+priv/templates/welcome/<country_code> <- internationalised templates
+```
+
+
 
 # Author
 

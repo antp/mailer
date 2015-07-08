@@ -20,4 +20,10 @@ defmodule Mailer.Template.Locator.Test do
     assert 2 == length(templates)
   end
 
+  test "will locate the default template when it is not found in the language directory"  do
+    templates = Mailer.Template.Locator.locate("plain", "fr")
+
+    assert 1 == length(templates)
+  end
+
 end

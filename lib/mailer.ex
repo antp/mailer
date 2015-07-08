@@ -98,7 +98,7 @@ defmodule Mailer do
   end
 
   @doc false
-  defp compose_email_by_type(from, to, subject, [plain], data) do
+  defp compose_email_by_type(from, to, subject, [{:text, plain}], data) do
     date = Timex.Date.local
     date = Timex.DateFormat.format!(date, "%a, %d %b %Y %T %z", :strftime)
     email = Plain.create
@@ -115,7 +115,7 @@ defmodule Mailer do
   end
 
   @doc false
-  defp compose_email_by_type(from, to, subject, [html, plain], data) do
+  defp compose_email_by_type(from, to, subject, [{:html, html}, {:text, plain}], data) do
     date = Timex.Date.local
     date = Timex.DateFormat.format!(date, "%a, %d %b %Y %T %z", :strftime)
     email = Multipart.create
