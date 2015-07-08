@@ -1,0 +1,5 @@
+%{"earmark": {:hex, :earmark, "0.1.13"},
+  "ex_doc": {:hex, :ex_doc, "0.7.1"},
+  "gen_smtp": {:git, "git://github.com/vagabond/gen_smtp.git", "fb667c6ed875be1ae8d5ea0fa74eb9043fd7ecc7", []},
+  "iconv": {:git, "git://github.com/antp/erlang-iconv.git", "7ad5ebff53a75bb3d4ffa6957e20c966c6032949", []},
+  "timex": {:git, "git://github.com/bitwalker/timex.git", "8c02618d8240f0120d8f0dafec48a430cd57b32f", []}}
