@@ -5,7 +5,7 @@ defmodule Mailer.Mixfile do
     [
       app: :mailer,
       version: version,
-      elixir: "~> 1.0.0",
+      elixir: "~> 1.0",
       deps: deps,
       description: description,
       package: package,
@@ -18,7 +18,7 @@ defmodule Mailer.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger, :iconv]]
+    [applications: [:logger, :iconv, :timex]]
   end
 
   def version do
@@ -42,7 +42,7 @@ defmodule Mailer.Mixfile do
     [
       {:gen_smtp, github: "vagabond/gen_smtp"},
       {:iconv, github: "antp/erlang-iconv"},
-      {:timex, github: "bitwalker/timex"},
+      {:timex, "~> 1.0.0-rc1"},
       {:ex_doc, "~> 0.6", only: :dev},
       {:earmark, ">= 0.0.0", only: :dev}
     ]
