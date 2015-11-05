@@ -61,7 +61,7 @@ defmodule Mailer.Mixfile do
   defp package do
     [
       files:        ["lib", "priv", "mix.exs", "README.md", "LICENCE.txt"],
-      contributors: ["Antony Pinchbeck", "Yurii Rashkovskii", "Paul Scarrone"],
+      contributors: ["Antony Pinchbeck", "Yurii Rashkovskii", "Paul Scarrone", "sldab", "mogadget", "Miguel Martins", "Mike Janger"],
       licenses:     ["apache 2 license"],
       links:        %{
                        "GitHub" => "https://github.com/antp/mailer",
