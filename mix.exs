@@ -6,6 +6,7 @@ defmodule Mailer.Mixfile do
       app: :mailer,
       version: version,
       elixir: "~> 1.0",
+      elixirc_paths: elixirc_paths(Mix.env),
       deps: deps,
       description: description,
       package: package,
@@ -18,12 +19,16 @@ defmodule Mailer.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger, :iconv, :timex]]
+    [applications: [:logger, :timex]]
   end
 
   def version do
     String.strip(File.read!("VERSION"))
   end
+
+  # Specifies which paths to compile per environment
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_),     do: ["lib"]
 
   # Dependencies can be Hex packages:
   #
@@ -40,8 +45,7 @@ defmodule Mailer.Mixfile do
   # Type `mix help deps` for more examples and options
   defp deps do
     [
-      {:gen_smtp, github: "vagabond/gen_smtp"},
-      {:iconv, github: "antp/erlang-iconv"},
+      {:gen_smtp, "~> 0.9.0"},
       {:timex, "~> 1.0.0-rc1"},
       {:ex_doc, "~> 0.6", only: :dev},
       {:earmark, ">= 0.0.0", only: :dev}
