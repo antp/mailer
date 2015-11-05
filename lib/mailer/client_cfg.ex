@@ -3,8 +3,8 @@ defmodule Mailer.Client.Cfg do
             port: 1025,
             hostname: "mailer",
             transport: :smtp,
-            username: "",
-            password: "",
+            username: nil,
+            password: nil,
             tls: :if_available, # always, never, if_available
             ssl: :false, # true or flase
             auth: :if_available,
