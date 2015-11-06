@@ -15,7 +15,7 @@ defmodule Mailer.Email.Multipart do
   end
 
   def add_from(email, from) do
-    [_, domain] = String.split(from, "@")
+    domain = Mailer.Util.get_domain(from)
     email = %{email | from: from}
     %{email | domain: domain}
   end
@@ -130,7 +130,7 @@ defmodule Mailer.Email.Multipart do
   end
 
   defp process_header({"Message-ID", msg_id}, email) do
-    [_, domain] = String.split(msg_id, "@")
+    domain = domain = Mailer.Util.get_domain(msg_id)
 
     email = %{email | message_id: msg_id}
     %{email | domain: domain}
@@ -144,4 +144,3 @@ defmodule Mailer.Email.Multipart do
      email
   end
 end
-

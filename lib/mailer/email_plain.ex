@@ -14,7 +14,7 @@ defmodule Mailer.Email.Plain do
   end
 
   def add_from(email, from) do
-    [_, domain] = String.split(from, "@")
+    domain = Mailer.Util.get_domain(from)
     email = %{email | from: from}
     %{email | domain: domain}
   end
@@ -77,7 +77,7 @@ defmodule Mailer.Email.Plain do
       body
     } = msg
 
-    [_, domain] = String.split(msg_id, "@")
+    domain = Mailer.Util.get_domain(msg_id)
 
     to = maybe_list(to)
 
