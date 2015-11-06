@@ -125,9 +125,10 @@ defmodule Mailer do
   Ignores default parameters from the application config.
   """
   def compose_email(from, to, subject, template, data, country_code \\ "") do
-    templates = Mailer.Template.Locator.locate(template, country_code)
-
-    compose_email_by_type(from, to, subject, templates, data)
+    case Mailer.Template.Locator.locate(template, country_code) do
+      [] -> raise ArgumentError, message: "Template(s) not found: #{template}"
+      templates -> compose_email_by_type(from, to, subject, templates, data)
+    end
   end
 
   @doc false
