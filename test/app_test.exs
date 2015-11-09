@@ -44,9 +44,43 @@ defmodule App.Test do
     Mailer.Smtp.Client.send("from@example.com", "to@example.com", composed_email, server)
 
     [sent_email] = Test.Transport.get_mails
-    
+
     assert true == String.contains?(sent_email.content, "text/plain")
     assert true == String.contains?(sent_email.content, "text/html")
+  end
+
+  test "It will compose the same email with compose_email/1 and compose_email/6" do
+
+    data = [name: "John Doe"]
+
+    email1 = Mailer.compose_email("from@example.com", "to@example.com", "Multipart", "multipart", data)
+    |> Map.delete :message_id
+
+    email2 = Mailer.compose_email(from: "from@example.com",
+                                  to: "to@example.com",
+                                  subject: "Multipart",
+                                  template: "multipart",
+                                  data: data)
+    |> Map.delete :message_id
+
+    assert email1 == email2
+  end
+
+  test "It will take common_mail_params for compose_email/1" do
+
+    data = [name: "John Doe"]
+
+    Application.put_env(:mailer, :common_mail_params, [from: "from@example.com",
+                                                       subject: "Multipart",
+                                                       template: "multipart"])
+
+    email1 = Mailer.compose_email("from@example.com", "to@example.com", "Multipart", "multipart", data)
+    |> Map.delete :message_id
+
+    email2 = Mailer.compose_email(to: "to@example.com", data: data)
+    |> Map.delete :message_id
+
+    assert email1 == email2
   end
 
 end

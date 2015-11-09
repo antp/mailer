@@ -81,7 +81,7 @@ defmodule Mailer do
 
   Default parameters can be specified in the application config:
       config :mailer,
-        default_email_params: [from: "Example <noreply@example.com>"]
+        common_mail_params: [from: "Example <noreply@example.com>"]
 
   Given the that the templates are located in the location:
 
@@ -107,7 +107,7 @@ defmodule Mailer do
   @spec compose_email(list({atom(), term})) :: Email.Plain.t | Email.Multipart.t
 
   def compose_email(params) when is_list(params) do
-    final_params = Application.get_env(:mailer, :default_email_params)
+    final_params = Application.get_env(:mailer, :common_mail_params, [])
     |> Keyword.merge params
 
     compose_email(Keyword.get(final_params, :from),
