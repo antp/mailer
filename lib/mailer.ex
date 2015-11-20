@@ -16,7 +16,11 @@ defmodule Mailer do
 
   First compose an email with
 
-      email = Mailer.compose_email("from@example.com", "to@example.com", "Subject", "welcome_template", template_data)
+      email = Mailer.compose_email(from: "from@example.com",
+                                   to: "to@example.com",
+                                   subject: "Subject",
+                                   template: "welcome_template",
+                                   data: template_data)
 
   Then send the email with
 
@@ -69,7 +73,17 @@ defmodule Mailer do
   @doc """
   Compose an email to a recipient.
 
-  given the that the templates are located in the location:
+  The keyword list must contain the following parameters:
+    `:from`, `:to`, `:subject`, `:template`, `:data`.
+
+  The following parameters are optional:
+    `:country_code`
+
+  Default parameters can be specified in the application config:
+      config :mailer,
+        common_mail_params: [from: "Example <noreply@example.com>"]
+
+  Given the that the templates are located in the location:
 
       priv/templates
 
@@ -85,16 +99,36 @@ defmodule Mailer do
   it will send a multipart email.
 
   The template location can be internationalised by passing an optional
-  country code. for example passing a country code of 'en' will modify
+  country code. For example passing a country code of 'en' will modify
   the search path to:
 
       priv/templates/plain/en/
+  """
+  @spec compose_email(list({atom(), term})) :: Email.Plain.t | Email.Multipart.t
 
+  def compose_email(params) when is_list(params) do
+    final_params = Application.get_env(:mailer, :common_mail_params, [])
+    |> Keyword.merge params
+
+    compose_email(Keyword.get(final_params, :from),
+                  Keyword.get(final_params, :to),
+                  Keyword.get(final_params, :subject),
+                  Keyword.get(final_params, :template),
+                  Keyword.get(final_params, :data),
+                  Keyword.get(final_params, :country_code, ""))
+  end
+
+  @doc """
+  Compose an email to a recipient.
+
+  Similar to compose_email/1, but with parameters supplied directly.
+  Ignores default parameters from the application config.
   """
   def compose_email(from, to, subject, template, data, country_code \\ "") do
-    templates = Mailer.Template.Locator.locate(template, country_code)
-
-    compose_email_by_type(from, to, subject, templates, data)
+    case Mailer.Template.Locator.locate(template, country_code) do
+      [] -> raise ArgumentError, message: "Template(s) not found: #{template}"
+      templates -> compose_email_by_type(from, to, subject, templates, data)
+    end
   end
 
   @doc false
