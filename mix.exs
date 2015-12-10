@@ -60,7 +60,7 @@ defmodule Mailer.Mixfile do
 
   defp package do
     [
-      files:        ["lib", "priv", "mix.exs", "README.md", "LICENCE.txt"],
+      files:        ["lib", "priv", "mix.exs", "README.md", "LICENCE.txt", "VERSION"],
       maintainers:  ["Antony Pinchbeck", "Yurii Rashkovskii", "Paul Scarrone", "sldab", "mogadget", "Miguel Martins", "Mike Janger"],
       licenses:     ["apache 2 license"],
       links:        %{
