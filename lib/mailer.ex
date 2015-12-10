@@ -135,16 +135,16 @@ defmodule Mailer do
   defp compose_email_by_type(from, to, subject, [{:text, plain}], data) do
     date = Timex.Date.local
     date = Timex.DateFormat.format!(date, "%a, %d %b %Y %T %z", :strftime)
-    email = Plain.create
 
     body = Mail.Renderer.render(plain, data)
 
-    email = Plain.add_from(email, from)
-    email = Plain.add_to(email, to)
-    email = Plain.add_subject(email, subject)
-    email = Plain.add_message_id(email, Mailer.Message.Id.create(from))
-    email = Plain.add_date(email, date)
-    Plain.add_body(email, body)
+    Plain.create
+    |> Plain.add_from(from)
+    |> Plain.add_to(to)
+    |> Plain.add_subject(subject)
+    |> Plain.add_message_id(Mailer.Message.Id.create(from))
+    |> Plain.add_date(date)
+    |> Plain.add_body(body)
 
   end
 
@@ -152,18 +152,17 @@ defmodule Mailer do
   defp compose_email_by_type(from, to, subject, [{:html, html}, {:text, plain}], data) do
     date = Timex.Date.local
     date = Timex.DateFormat.format!(date, "%a, %d %b %Y %T %z", :strftime)
-    email = Multipart.create
 
     plain_text = Mail.Renderer.render(plain, data)
     html_text = Mail.Renderer.render(html, data)
 
-    email = Multipart.add_from(email, from)
-    email = Multipart.add_to(email, to)
-    email = Multipart.add_subject(email, subject)
-    email = Multipart.add_message_id(email, Mailer.Message.Id.create(from))
-    email = Multipart.add_date(email, date)
-    email = Multipart.add_text_body(email, plain_text)
-    Multipart.add_html_body(email, html_text)
-
+    Multipart.create
+    |> Multipart.add_from(from)
+    |> Multipart.add_to(to)
+    |> Multipart.add_subject(subject)
+    |> Multipart.add_message_id(Mailer.Message.Id.create(from))
+    |> Multipart.add_date(date)
+    |> Multipart.add_text_body(plain_text)
+    |> Multipart.add_html_body(html_text)
   end
 end
