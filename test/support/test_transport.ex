@@ -25,6 +25,6 @@ defmodule Test.Transport do
   end
 
   def get_mails do
-    mails = Agent.get(__MODULE__, fn(state) -> state end)
+    Agent.get(__MODULE__, fn(state) -> state end)
   end
 end

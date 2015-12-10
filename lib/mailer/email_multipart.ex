@@ -130,7 +130,7 @@ defmodule Mailer.Email.Multipart do
   end
 
   defp process_header({"Message-ID", msg_id}, email) do
-    domain = domain = Mailer.Util.get_domain(msg_id)
+    domain = Mailer.Util.get_domain(msg_id)
 
     email = %{email | message_id: msg_id}
     %{email | domain: domain}

@@ -29,9 +29,9 @@ defmodule Mailer do
   The response can be checked for failed deliveries.
   """
 
-  @doc """
-  Start the mailer application
-  """
+  # @doc """
+  # Start the mailer application
+  # """
   # def start(_type, _args) do
   #   import Supervisor.Spec, warn: false
 
@@ -108,7 +108,7 @@ defmodule Mailer do
 
   def compose_email(params) when is_list(params) do
     final_params = Application.get_env(:mailer, :common_mail_params, [])
-    |> Keyword.merge params
+    |> Keyword.merge(params)
 
     compose_email(Keyword.get(final_params, :from),
                   Keyword.get(final_params, :to),

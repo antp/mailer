@@ -54,14 +54,14 @@ defmodule App.Test do
     data = [name: "John Doe"]
 
     email1 = Mailer.compose_email("from@example.com", "to@example.com", "Multipart", "multipart", data)
-    |> Map.delete :message_id
+    |> Map.delete(:message_id)
 
     email2 = Mailer.compose_email(from: "from@example.com",
                                   to: "to@example.com",
                                   subject: "Multipart",
                                   template: "multipart",
                                   data: data)
-    |> Map.delete :message_id
+    |> Map.delete(:message_id)
 
     assert email1 == email2
   end
@@ -75,10 +75,10 @@ defmodule App.Test do
                                                        template: "multipart"])
 
     email1 = Mailer.compose_email("from@example.com", "to@example.com", "Multipart", "multipart", data)
-    |> Map.delete :message_id
+    |> Map.delete(:message_id)
 
     email2 = Mailer.compose_email(to: "to@example.com", data: data)
-    |> Map.delete :message_id
+    |> Map.delete(:message_id)
 
     assert email1 == email2
   end
