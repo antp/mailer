@@ -10,5 +10,5 @@
   "mimerl": {:hex, :mimerl, "1.0.2"},
   "rebar3_hex": {:hex, :rebar3_hex, "0.9.0"},
   "ssl_verify_hostname": {:hex, :ssl_verify_hostname, "1.0.5"},
-  "timex": {:hex, :timex, "1.0.0"},
+  "timex": {:hex, :timex, "2.1.0"},
   "tzdata": {:hex, :tzdata, "0.5.6"}}

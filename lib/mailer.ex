@@ -1,6 +1,7 @@
 defmodule Mailer do
   alias Mailer.Email.Plain
   alias Mailer.Email.Multipart
+  alias Mailer.Util
 
   @moduledoc """
   A simple SMTP mailer.
@@ -133,8 +134,7 @@ defmodule Mailer do
 
   @doc false
   defp compose_email_by_type(from, to, subject, [{:text, plain}], data) do
-    date = Timex.Date.local
-    date = Timex.DateFormat.format!(date, "%a, %d %b %Y %T %z", :strftime)
+    date = Util.localtime_to_str
 
     body = Mail.Renderer.render(plain, data)
 
@@ -150,8 +150,7 @@ defmodule Mailer do
 
   @doc false
   defp compose_email_by_type(from, to, subject, [{:html, html}, {:text, plain}], data) do
-    date = Timex.Date.local
-    date = Timex.DateFormat.format!(date, "%a, %d %b %Y %T %z", :strftime)
+    date = Util.localtime_to_str
 
     plain_text = Mail.Renderer.render(plain, data)
     html_text = Mail.Renderer.render(html, data)

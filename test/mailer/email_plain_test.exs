@@ -2,6 +2,7 @@ defmodule Mailer.Email.Plain.Test do
   use ExUnit.Case
 
   alias Mailer.Email.Plain
+  alias Mailer.Util
 
   test "can set the from and domain fields" do
     email = Plain.create
@@ -55,8 +56,7 @@ defmodule Mailer.Email.Plain.Test do
 
 
   test "will compose the email" do
-    date = Timex.Date.local
-    date = Timex.DateFormat.format!(date, "%a, %d %m %Y %T %z", :strftime)
+    date = Util.localtime_to_str
     email = Plain.create
 
     email = Plain.add_from(email, "from@example.com")
@@ -91,8 +91,7 @@ defmodule Mailer.Email.Plain.Test do
   end
 
   test "will decompose the email" do
-    date = Timex.Date.local
-    date = Timex.DateFormat.format!(date, "%a, %d %m %Y %T %z", :strftime)
+    date = Util.localtime_to_str
     email_src = Plain.create
 
     email_src = Plain.add_from(email_src, "from@example.com")
