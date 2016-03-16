@@ -2,6 +2,7 @@ defmodule Mailer.Email.Multipart.Test do
   use ExUnit.Case
 
   alias Mailer.Email.Multipart, as: Email
+  alias Mailer.Util
 
   test "can set the from and domain fields" do
     email = Email.create
@@ -62,8 +63,7 @@ defmodule Mailer.Email.Multipart.Test do
   end
 
   test "will compose the email" do
-    date = Timex.Date.local
-    date = Timex.DateFormat.format!(date, "%a, %d %m %Y %T %z", :strftime)
+    date = Util.localtime_to_str
 
     email = Email.create
 
@@ -121,8 +121,7 @@ composed = {"multipart", "alternative",
   end
 
   test "will decompose the email" do
-    date = Timex.Date.local
-    date = Timex.DateFormat.format!(date, "%a, %d %m %Y %T %z", :strftime)
+    date = Util.localtime_to_str
     email_src = Email.create
 
     email_src = Email.add_from(email_src, "from@example.com")

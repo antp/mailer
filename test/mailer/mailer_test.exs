@@ -3,6 +3,7 @@ defmodule Mailer.Client.Test do
 
   alias Mailer.Email.Plain
   alias Mailer.Email.Multipart
+  alias Mailer.Util
 
   setup_all do
     Test.Transport.start
@@ -12,8 +13,7 @@ defmodule Mailer.Client.Test do
 
   test "It will send plain text email" do
 
-    date = Timex.Date.local
-    date = Timex.DateFormat.format!(date, "%a, %d %b %Y %T %z", :strftime)
+    date = Util.localtime_to_str
     email = Plain.create
 
     email = Plain.add_from(email, "from@example.com")
@@ -40,8 +40,7 @@ defmodule Mailer.Client.Test do
 
   test "It will send multipart email" do
 
-    date = Timex.Date.local
-    date = Timex.DateFormat.format!(date, "%a, %d %b %Y %T %z", :strftime)
+    date = Util.localtime_to_str
     email = Multipart.create
 
     email = Multipart.add_from(email, "from@example.com")
