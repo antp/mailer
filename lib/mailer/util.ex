@@ -2,7 +2,7 @@ defmodule Mailer.Util do
 
   def localtime_to_str() do
     date = Timex.DateTime.local
-    Timex.format!(date, "%a, %d %m %Y %T %z", :strftime)
+    Timex.format!(date, "{RFC822}")
   end
 
   def get_domain(address) do
