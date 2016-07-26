@@ -1,7 +1,7 @@
 defmodule Mailer.Util do
 
   def localtime_to_str() do
-    date = Timex.DateTime.local
+    date = Timex.local
     Timex.format!(date, "%a, %d %m %Y %T %z", :strftime)
   end
 
