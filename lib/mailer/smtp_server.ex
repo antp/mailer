@@ -58,7 +58,8 @@ defmodule Mailer.Smtp.Server do
   def handle_DATA(_from, _to, data, state) do
     try do
       msg = :mimemail.decode(data)
-      queued_as = Uuid.create
+      queued_as = Mailer.Message.Id.create_uuid
+        |> Mailer.Message.Id.uuid_to_string
 
       server_cfg = Application.get_env(:mailer, :smtp_server)
 
