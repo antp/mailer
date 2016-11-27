@@ -17,13 +17,8 @@ defmodule App.Test do
     data = [name: "John Doe"]
     composed_email = Mailer.compose_email("from@example.com", "to@example.com", "Plain", "plain", data)
 
-    composed_email = Plain.compose(composed_email)
-
-    server = Mailer.Client.Cfg.create
-    server = Mailer.Client.Cfg.to_options(server)
-
     Test.Transport.clear
-    Mailer.Smtp.Client.send("from@example.com", "to@example.com", composed_email, server)
+    Mailer.send(composed_email)
 
     [sent_email] = Test.Transport.get_mails
 
@@ -35,13 +30,8 @@ defmodule App.Test do
     data = [name: "John Doe"]
     composed_email = Mailer.compose_email("from@example.com", "to@example.com", "Multipart", "multipart", data)
 
-    composed_email = Multipart.compose(composed_email)
-
-    server = Mailer.Client.Cfg.create
-    server = Mailer.Client.Cfg.to_options(server)
-
     Test.Transport.clear
-    Mailer.Smtp.Client.send("from@example.com", "to@example.com", composed_email, server)
+    Mailer.send(composed_email)
 
     [sent_email] = Test.Transport.get_mails
 
