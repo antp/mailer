@@ -46,7 +46,7 @@ defmodule Mailer.Mixfile do
   defp deps do
     [
       {:gen_smtp, "~> 0.11.0"},
-      {:timex, "~> 3.0.0"},
+      {:timex, "~> 3.1.5"},
       {:ex_doc, "~> 0.11.4", only: :dev},
       {:earmark, ">= 0.2.1", only: :dev}
     ]
