@@ -3,6 +3,7 @@ defmodule Mailer.Email.Plain.Test do
 
   alias Mailer.Email.Plain
   alias Mailer.Util
+  import Enum, only: [sort: 1]
 
   test "can set the from and domain fields" do
     email = Plain.create
@@ -19,6 +20,22 @@ defmodule Mailer.Email.Plain.Test do
     email = Plain.add_to(email, "one@example.com")
 
     assert ["one@example.com"] == email.to
+  end
+
+  test "can set cc field" do
+    email = Plain.create
+            |> Plain.add_cc("mujju@example.com")
+            |> Plain.add_cc("zainu@example.com")
+
+    assert sort(["mujju@example.com",  "zainu@example.com"]) == sort(email.cc)
+  end
+
+  test "can set bcc field" do
+    email = Plain.create
+            |> Plain.add_bcc("mujju@example.com")
+            |> Plain.add_bcc("zainu@example.com")
+
+    assert sort(["mujju@example.com",  "zainu@example.com"]) == sort(email.bcc)
   end
 
   test "can set the subject" do
@@ -71,6 +88,8 @@ defmodule Mailer.Email.Plain.Test do
                   [
                     {"From", "from@example.com"},
                     {"To", ["to@example.com"]},
+                    {"Cc", []},
+                    {"Bcc", []},
                     {"Subject", "welcome"},
                     {"Message-ID", "123@example.com"},
                     {"MIME-Version", "1.0"},

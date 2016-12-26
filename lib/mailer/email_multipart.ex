@@ -3,6 +3,8 @@ defmodule Mailer.Email.Multipart do
             from: "",
             domain: "",
             to: [],
+            cc: [],
+            bcc: [],
             subject: "",
             headers: [],
             message_id: "",
@@ -22,6 +24,14 @@ defmodule Mailer.Email.Multipart do
 
   def add_to(email, to) do
     %{email | to: [to | email.to]}
+  end
+
+  def add_cc(email, cc) do
+    %{email | cc: [cc | email.cc]}
+  end
+
+  def add_bcc(email, bcc) do
+    %{email | bcc: [bcc | email.bcc]}
   end
 
   def add_subject(email, subject) do
@@ -50,6 +60,8 @@ defmodule Mailer.Email.Multipart do
       [
         {"From", email.from},
         {"To", email.to},
+        {"Cc", email.cc},
+        {"Bcc", email.bcc},
         {"Subject", email.subject},
         {"Message-ID", email.message_id},
         {"MIME-Version", "1.0"},
@@ -119,6 +131,14 @@ defmodule Mailer.Email.Multipart do
 
   defp process_header({"From", from}, email) do
     %{email | from: from}
+  end
+
+  defp process_header({"Cc", cc}, email) do
+    %{email | cc: cc}
+  end
+
+  defp process_header({"Bcc", bcc}, email) do
+    %{email | bcc: bcc}
   end
 
   defp process_header({"To", to}, email) do
