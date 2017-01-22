@@ -4,12 +4,12 @@ defmodule Mailer.Mixfile do
   def project do
     [
       app: :mailer,
-      version: version,
+      version: version(),
       elixir: "~> 1.3",
       elixirc_paths: elixirc_paths(Mix.env),
-      deps: deps,
-      description: description,
-      package: package,
+      deps: deps(),
+      description: description(),
+      package: package(),
       name: "Mailer",
       source_url: "https://github.com/antp/mailer"
     ]
@@ -46,7 +46,7 @@ defmodule Mailer.Mixfile do
   defp deps do
     [
       {:gen_smtp, "~> 0.11.0"},
-      {:timex, "~> 3.1.5"},
+      {:timex, "~> 3.1.8"},
       {:ex_doc, "~> 0.11.4", only: :dev},
       {:earmark, ">= 0.2.1", only: :dev}
     ]
