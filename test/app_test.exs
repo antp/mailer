@@ -1,9 +1,6 @@
 defmodule App.Test do
   use ExUnit.Case
 
-  alias Mailer.Email.Plain
-  alias Mailer.Email.Multipart
-
   setup_all do
     Test.Transport.start
 
