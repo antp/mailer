@@ -5,7 +5,7 @@ defmodule Mailer.Message.Id do
   Creates a uuid v4
   """
   def create(domain) do
-    string_uuid = create_uuid
+    string_uuid = create_uuid()
       |> uuid_to_string
 
 
