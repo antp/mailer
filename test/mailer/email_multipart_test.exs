@@ -3,6 +3,7 @@ defmodule Mailer.Email.Multipart.Test do
 
   alias Mailer.Email.Multipart, as: Email
   alias Mailer.Util
+  import Enum, only: [sort: 1]
 
   test "can set the from and domain fields" do
     email = Email.create
@@ -19,6 +20,22 @@ defmodule Mailer.Email.Multipart.Test do
     email = Email.add_to(email, "one@example.com")
 
     assert ["one@example.com"] == email.to
+  end
+
+  test "can set cc field" do
+    email = Email.create
+            |> Email.add_cc("mujju@example.com")
+            |> Email.add_cc("zainu@example.com")
+
+    assert sort(["mujju@example.com",  "zainu@example.com"]) == sort(email.cc)
+  end
+
+  test "can set bcc field" do
+    email = Email.create
+            |> Email.add_bcc("mujju@example.com")
+            |> Email.add_bcc("zainu@example.com")
+
+    assert sort(["mujju@example.com",  "zainu@example.com"]) == sort(email.bcc)
   end
 
   test "can set the subject" do
@@ -69,6 +86,8 @@ defmodule Mailer.Email.Multipart.Test do
 
     email = Email.add_from(email, "from@example.com")
     email = Email.add_to(email, "to@example.com")
+    email = Email.add_cc(email, "cc@example.com")
+    email = Email.add_bcc(email, "bcc@example.com")
     email = Email.add_subject(email, "welcome")
     email = Email.add_message_id(email, "123@example.com")
     email = Email.add_date(email, date)
@@ -76,10 +95,12 @@ defmodule Mailer.Email.Multipart.Test do
     email = Email.add_html_body(email, "html body")
 
 
-composed = {"multipart", "alternative",
+    composed = {"multipart", "alternative",
               [
                   {"From", "from@example.com"},
                   {"To", ["to@example.com"]},
+                  {"Cc", ["cc@example.com"]},
+                  {"Bcc", ["bcc@example.com"]},
                   {"Subject", "welcome"},
                   {"Message-ID", "123@example.com"},
                   {"MIME-Version", "1.0"},

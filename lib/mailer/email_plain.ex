@@ -3,6 +3,8 @@ defmodule Mailer.Email.Plain do
             from: "",
             domain: "",
             to: [],
+            cc: [],
+            bcc: [],
             subject: "",
             headers: [],
             message_id: "",
@@ -21,6 +23,14 @@ defmodule Mailer.Email.Plain do
 
   def add_to(email, to) do
     %{email | to: [to | email.to]}
+  end
+
+  def add_cc(email, cc) do
+    %{email | cc: [cc | email.cc]}
+  end
+
+  def add_bcc(email, bcc) do
+    %{email | bcc: [bcc | email.bcc]}
   end
 
   def add_subject(email, subject) do
@@ -45,6 +55,8 @@ defmodule Mailer.Email.Plain do
       [
         {"From", email.from},
         {"To", email.to},
+        {"Cc", email.cc},
+        {"Bcc", email.bcc},
         {"Subject", email.subject},
         {"Message-ID", email.message_id},
         {"MIME-Version", "1.0"},
@@ -68,6 +80,8 @@ defmodule Mailer.Email.Plain do
       [
         {"From", from},
         {"To", to},
+        {"Cc", cc},
+        {"Bcc", bcc},
         {"Subject", subject},
         {"Message-ID", msg_id},
         {"MIME-Version", "1.0"},
@@ -83,6 +97,8 @@ defmodule Mailer.Email.Plain do
 
     %Mailer.Email.Plain{from: from,
                         to: to,
+                        cc: cc,
+                        bcc: bcc,
                         subject: subject,
                         domain: domain,
                         message_id: msg_id,
