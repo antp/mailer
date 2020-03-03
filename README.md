@@ -47,7 +47,7 @@ Successful deliveries will have OK in the response such as:
 
 Failed deliveries will have a response similar to:
 
-```
+```elixir
 {:error, :retries_exceeded,
  {:network_failure, "xxx.xxx.xxx.xxx", {:error, :ehostunreach}}}
 ```
